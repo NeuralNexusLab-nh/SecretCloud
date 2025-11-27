@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Cloud // Secure Storage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="overlay"></div> <!-- Scanlines -->
+    
+    <div class="container">
+        <header>
+            <h1>SECRET_CLOUD_V1.0</h1>
+            <div id="status-bar">STATUS: DISCONNECTED</div>
+        </header>
+
+        <!-- Notification Area -->
+        <div id="terminal-output"></div>
+
+        <!-- 1. INTRO / LANDING -->
+        <section id="page-home" class="active">
+            <p class="typewriter">WELCOME TO SECRET CLOUD.</p>
+            <p>SECURE. ENCRYPTED. ANONYMOUS.</p>
+            <p>NO VERSION CONTROL. RAW STORAGE. WEB IDE.</p>
+            <br>
+            <div class="menu">
+                <button onclick="showPage('create')">[ CREATE REPO ]</button>
+                <button onclick="showPage('login')">[ LOGIN REPO ]</button>
+            </div>
+        </section>
+
+        <!-- 2. CREATE REPO -->
+        <section id="page-create" class="hidden">
+            <h2>// INITIALIZE NEW REPOSITORY</h2>
+            <div class="form-group">
+                <label>REPO NAME:</label>
+                <input type="text" id="create-name" placeholder="unique_name">
+            </div>
+            <div class="form-group">
+                <label>PASSWORD:</label>
+                <input type="password" id="create-pass" placeholder="********">
+            </div>
+            <div class="actions">
+                <button onclick="createRepo()">[ INITIALIZE ]</button>
+                <button onclick="showPage('home')">[ BACK ]</button>
+            </div>
+        </section>
+
+        <!-- 3. LOGIN REPO -->
+        <section id="page-login" class="hidden">
+            <h2>// ACCESS PROTOCOL</h2>
+            <div class="form-group">
+                <label>REPO NAME:</label>
+                <input type="text" id="login-name">
+            </div>
+            <div class="form-group">
+                <label>PASSWORD:</label>
+                <input type="password" id="login-pass">
+            </div>
+            <div class="actions">
+                <button onclick="loginRepo()">[ AUTHENTICATE ]</button>
+                <button onclick="showPage('home')">[ BACK ]</button>
+            </div>
+        </section>
+
+        <!-- 4. DASHBOARD (LOGGED IN) -->
+        <section id="page-dashboard" class="hidden">
+            <div class="dash-header">
+                <h2>ROOT@<span id="dash-repo-name">UNKNOWN</span>:~#</h2>
+                <button onclick="logout()">[ LOGOUT ]</button>
+            </div>
+            
+            <div class="stats-panel">
+                <p>STORAGE USAGE: <span id="storage-usage">0</span> / 50 GB</p>
+                <div class="control-row">
+                    <span>VISIBILITY: <span id="visibility-status">PRIVATE</span></span>
+                    
+                    <button class="small-btn" onclick="toggleVisibility()">[ TOGGLE ]</button>
+                    <div class="tooltip-container">
+                        <div class="info-circle">i</div>
+                        <span class="tooltip-text">Private: Only you can access. Public: Anyone with link can view files.</span>
+                    </div>
+                </div>
+                <button class="danger-btn" onclick="deleteRepo()">[ DELETE REPO ]</button>
+            </div>
+
+            <div class="file-manager">
+                <h3>// FILES SYSTEM</h3>
+                <ul id="file-list"></ul>
+            </div>
+
+            <div class="editor-actions">
+                <input type="text" id="new-filename" placeholder="new_file.js">
+                <button onclick="createFile()">[ CREATE FILE ]</button>
+                <div class="tooltip-container">
+                    <div class="info-circle">i</div>
+                    <span class="tooltip-text">Create empty file to open in IDE.</span>
+                </div>
+                
+                <span style="margin: 0 10px">OR</span>
+                
+                <input type="file" id="upload-input">
+                <button onclick="uploadFile()">[ UPLOAD ]</button>
+            </div>
+        </section>
+
+        <!-- 5. WEB IDE -->
+        <section id="page-ide" class="hidden">
+            <div class="ide-header">
+                <h3>EDITING: <span id="ide-filename">filename</span></h3>
+                <div>
+                    <button onclick="saveFile()" id="btn-save">[ SAVE ]</button>
+                    <button onclick="closeIde()">[ CLOSE ]</button>
+                </div>
+            </div>
+            <textarea id="code-editor" spellcheck="false"></textarea>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
