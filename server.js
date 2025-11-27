@@ -309,7 +309,7 @@ app.get('/:repoName/:fileName', (req, res) => {
 });
 
 // Start
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log(`[SYSTEM] Secret Cloud Server is running on port ${PORT}`);
     console.log(`[SYSTEM] Encrypted. Secure. Hacker Mode: ON.`);
 });
